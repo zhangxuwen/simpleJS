@@ -21,6 +21,15 @@ function simpleAxios(config) {
                 reject(new Error(xhr.response))
             }
         })
-        xhr.send()
+
+        // 判断是否有data选项
+        if (config.data) {
+
+            const jsonStr = JSON.stringify(config.data)
+            xhr.setRequestHeader('Content-Type', 'application/json')
+            xhr.send(jsonStr)
+        } else {
+            xhr.send()
+        }
     })
 }
